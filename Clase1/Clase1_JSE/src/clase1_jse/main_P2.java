@@ -27,7 +27,7 @@ public class main_P2 {
         }
         
 //        if (condicion == 3) 
-//            System.out.println("La variable condicion es igual a 3 - sin llaves");
+//          System.out.println("La variable condicion es igual a 3 - sin llaves");
         
         if (condicion == 4) {
             System.out.println("La variable condicion es igual a 3");
