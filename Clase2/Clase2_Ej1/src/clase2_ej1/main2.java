@@ -89,6 +89,7 @@ public class main2 {
                 vecPositivos[indicePositivo] = vecNumeros[i];
                 indicePositivo++;
                 totalPositivos += vecNumeros[i];
+                //totalPositivos = totalPositivos + vecNumeros[i];
                 System.out.println("Total Positivo parcial: " + totalPositivos);
             }
         }

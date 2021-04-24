@@ -11,4 +11,10 @@ package clase2_ej1;
  */
 public class main3 {
     
+    public static void main(String[] args) {
+    
+    
+    
+    }
+    
 }

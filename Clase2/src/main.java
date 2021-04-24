@@ -9,6 +9,7 @@ public class main {
 
         // definimos vectores de notas y nombres
         double[] notas_alumno;
+        Double numero;
         String[] nombres_alumnos;
         int cant_alumnos;
 
