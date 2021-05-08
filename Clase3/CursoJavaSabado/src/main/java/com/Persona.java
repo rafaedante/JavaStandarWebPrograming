@@ -33,8 +33,7 @@ public class Persona {
     
     public String getNombre(){
         return this.nombre;
-    }
- 
+    } 
             
     void mostrarDatos() {
         String datos = "nombre= " + this.nombre + ", apellido: " + apellido + 
