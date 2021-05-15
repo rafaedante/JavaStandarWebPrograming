@@ -3,6 +3,7 @@ package com;
 import entidades.Documento;
 import entidades.Persona;
 
+import java.util.Date;
 import java.util.Scanner;
 
 /**
@@ -13,6 +14,7 @@ public class App
 {
     public static void main( String[] args )
     {
+        /*
         Scanner entrada = new Scanner(System.in);
         Persona[] personas;
 
@@ -34,27 +36,21 @@ public class App
             System.out.print("Ingrese el numero de documento de la persona[" + (i) + "]: ");
             int numeroDocumento = entrada.nextInt();
             System.out.print("Ingrese la edad de la persona[" + (i) + "]: ");
-            int edad = entrada.nextInt();
+            //int f = entrada.nextInt();
 
             Documento documento = new Documento(tipoDocumento, numeroDocumento);
-            Persona personaAux = new Persona(nombre, apellido, documento, edad);
+            Persona personaAux = new Persona(nombre, apellido, documento, new Date());
             personas[i] = personaAux;
             System.out.println();
-            /*
-            personas = [A, B, C]
-            * */
+
         }
 
         System.out.println("Datos de las personas ingresadas");
         for(int i=0; i < personas.length; i++) {
             System.out.println(personas[i].mostrarDatos());
         }
+
+        */
     }
 }
 
-// agregar personas a una lista
-// pedira al usuario nombre, apellido, tipo y nro doc, edad
-// tipo doc y nro doc crear una clase para esos datos
-// mostrar los datos
-
-// crear un paquete para almacena las clases
