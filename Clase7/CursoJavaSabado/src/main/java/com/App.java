@@ -1,10 +1,14 @@
 package com;
 
+import comparadores.OrdenDocumento;
 import entidades.*;
+import enumerados.TiposDocumento;
+import excepciones.ExcepcionPersona;
+import interfaces.Constantes;
 
-import java.util.Date;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Hello world!
@@ -20,20 +24,22 @@ public class App
         try {
             Scanner entrada = new Scanner(System.in);
 
-            Persona[] personas;
+            //Persona[] personas;
+            Set<Persona> personas = new HashSet<>();
+            List<Persona> listaPersonas = new ArrayList<Persona>();
 
             System.out.println("Ingreso datos de personas");
             System.out.println();
 
             System.out.print("Ingrese la cantidad de personas que se cargara: ");
             int cantidadPersonas = entrada.nextInt();
-            personas = new Persona[cantidadPersonas];
+            //personas = new Persona[cantidadPersonas];
 
 
-            for(int i=0; i< personas.length; i++) {
+            for(int i=0; i< cantidadPersonas; i++) {
                 String nombre;
                 String apellido;
-                String tipo;
+                TiposDocumento tipo;
                 Integer numero;
                 Date fechaNacimiento;
                 Date fechaIngreso;
@@ -56,12 +62,42 @@ public class App
                 nombre = teclado.next();
                 System.out.print("Ingrese apellido de la persona [" + (i + 1) + "]: ");
                 apellido = teclado.next();
-                System.out.print("Ingrese tipo de documento de la persona [" + (i + 1) + "]: ");
-                tipo = teclado.next();
+
+                while (true) {
+                    System.out.print("Ingrese tipo de documento de la persona [" + (i + 1) + "]: ");
+                    try {
+                        tipo = TiposDocumento.valueOf(teclado.next().toUpperCase());
+                        break;
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+
+                    /*
+                    try{
+
+                        boolean documentoCorrecto = false;
+                        for (int j=0; j < Constantes.tipoDocumento.length; j++) {
+                            if(tipo.equalsIgnoreCase(Constantes.tipoDocumento[j])) {
+                                documentoCorrecto = true;
+                                break;
+                            }
+                        }
+                        if(!documentoCorrecto)
+                            throw new ExcepcionPersona(1);
+                        else
+                            break;
+
+                    }catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                    */
+
+                }
+
                 System.out.print("Ingrese numero de documento de la persona [" + (i + 1) + "]: ");
                 numero = teclado.nextInt();
                 System.out.print("Ingrese Fecha de nacimiento de la persona [" + (i + 1) + "]: ");
-                fechaNacimiento = obtenerFecha();
+                fechaNacimiento = obtenerFecha2();
 
                 switch (tipoPersona) {
                     case 1: //alumno
@@ -110,7 +146,8 @@ public class App
                         break;
                 }
 
-                personas[i] = persona;
+                //personas[i] = persona;
+                personas.add(persona);
 
             }
 
@@ -118,6 +155,16 @@ public class App
             for(Persona persona : personas) {
                 System.out.println(persona);
                 System.out.println(persona.mostrarTipoPersona());
+            }
+
+            // coleccion para proceder a ordenarla
+            listaPersonas.addAll(personas);
+            listaPersonas.sort(new OrdenDocumento());
+
+            System.out.println();
+            System.out.println("personas ordenadas");
+            for(Persona persona : listaPersonas) {
+                System.out.println(persona);
             }
 
 
@@ -130,7 +177,6 @@ public class App
         }
 
     }
-
 
 
     private static Date obtenerFecha() {
@@ -192,6 +238,27 @@ public class App
         }
 
         return new Date(anio - 1900, mes - 1, dia);
+    }
+
+    private static Date obtenerFecha2() {
+        final String PATRON = "dd/mm/yyyyy";
+        final SimpleDateFormat FORMATO_FECHA = new SimpleDateFormat(PATRON);
+
+        String fechaUsuario = "";
+        Date fecha = null;
+
+        while(true) {
+            try {
+                System.out.print("Formato fecha [dd/mm/yyyy]: ");
+                fechaUsuario = teclado.next();
+                fecha = FORMATO_FECHA.parse(fechaUsuario);
+                break;
+            } catch (ParseException e) {
+                System.out.println("Debe ingresa un dato valido: " + e.getMessage());
+            }
+        }
+
+        return fecha;
     }
 
     private static String[] agregarCursos(int cantidad) {
